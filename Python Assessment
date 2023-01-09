@@ -1,0 +1,134 @@
+menu = [
+
+ {'Code_Number': 00, 'Product_Name':'Coffee', 'Price': 5},
+ {'Code_Number': 1,'Product_Name':'Coca-Cola', 'Price': 4},
+ {'Code_Number': 2, 'Product_Name':'Water','Price': 2},
+ {'Code_Number': 3,'Product_Name':'Chocolate Milk','Price': 4},
+ {'Code_Number': 4,'Product_Name':'C2','Price': 5 },
+
+ {'Code_Number': 5,'Product_Name':'Gum','Price': 3 },
+ {'Code_Number': 6,'Product_Name':'Skittles','Price': 5 },
+ {'Code_Number': 7,'Product_Name':'M&M','Price': 5 },
+ {'Code_Number': 8,'Product_Name':'Mentos','Price': 3 },
+ {'Code_Number': 9,'Product_Name':'Tic tac','Price': 3 },
+
+ {'Code_Number': 10,'Product_Name':'Oreo','Price': 3},
+ {'Code_Number': 11,'Product_Name':'Brownies','Price': 4},
+ {'Code_Number': 12,'Product_Name':'Chips Ahoy','Price': 7},
+ {'Code_Number': 13,'Product_Name':'Lotus','Price': 9},
+ {'Code_Number': 14,'Product_Name':'Croissant','Price': 4},
+
+
+ {'Code_Number': 15,'Product_Name':'Sanitizer','Price': 5},
+ {'Code_Number': 16,'Product_Name':'Tissue','Price': 3},
+ {'Code_Number': 17,'Product_Name':'Band-Aids','Price': 10},
+ {'Code_Number': 18,'Product_Name':'Panadol','Price': 25},
+ {'Code_Number': 19,'Product_Name':'Alcohol','Price': 15},
+
+]
+
+products = []
+
+reciept = """
+\t\t 
+Welcome to Python Vending Machine. This is the official receipt of your purchase
+
+Code Number - Product Name - Price in AED 
+
+"""
+
+sum = 0
+
+run = True
+
+print("------- Python Vending Machine-------\n")
+print("----------The Items Are---------\n\n")
+
+for x in menu:
+     print(f"Code Number: {x['Code_Number']}  ||  {x['Price']} Dirhams  ||  Product: {x['Product_Name']}")
+
+
+def machine(menu, run, products):
+  
+    while run:
+        choosing_item = int(input("\n\nEnter the number code product that you want to buy: "))
+        ### chosen_item_price = menu[choosing_item]["Price"]
+
+        if choosing_item < len(menu):
+            products.append(menu[choosing_item])
+            
+        else:
+            print("The number code is incorrect.")
+         
+        adding_items = str(input("Would you like to add more? If yes,please press any Enter and you will be ask again. If no, please press 0. "))
+        ### chosen_item_price = menu[choosing_item][adding_items]["Price"]
+
+        ###if adding_items == len("Price"):
+            ###product.append(menu[adding_items])
+        if adding_items == "0": ## Changes
+            run = False
+            print("Total Amount Purchased is ", sum(products) , "AED.") ## NEW CODE
+            ###print("Total Amount Purchased is ", products , "AED.") ### DOES NOT WORK THE WAY IT WAS SUPPOSED TO
+    
+
+    amount = int(input("Press 1 if you want to pay by cash. Press 2 if you want to pay by card. "))
+    if amount == 1:
+        print ("Note: Please enter the exact amount of your purchase. ")
+        print (input("Please insert money: "))
+
+        
+    elif amount == 2:
+        print("Processing...")
+        print("Payment Accepted.")
+        
+        
+        
+    else:
+        print(amount)
+
+    pay_bool = int(input("1. Would you like to print the reciept? 2. Print the total amount in AED .. "))
+    if pay_bool == 1:
+        print(create_reciept(products, reciept))
+    elif pay_bool == 2:
+        print(sum(products))
+    else:
+        print("Error")
+        
+
+    
+
+    print ("Your purchased items are now ready to get.")
+    get_product = str(input("Please type 'OK' if you got your purchased items already."))
+    if get_product == "OK":
+        print("Thank you for purchasing in Python Vending Machine.")
+    
+
+
+
+def sum(products):
+    sum = 0
+
+    for x in products:
+        sum += x["Price"]
+
+    return sum
+
+
+
+def create_reciept(Product_Name, reciept):
+
+    for x in Product_Name:
+        reciept += f"""
+        {x['Code_Number']} ------- {x['Product_Name']} ------- {x['Price']}
+        """
+
+    reciept += f"""
+        \tTotal -- {sum(products)} 
+        
+        
+        """
+    return reciept
+
+
+if __name__ == "__main__":
+    machine (menu, run, products)
