@@ -52,7 +52,7 @@ def machine(menu, run, products):
   
     while run:
         choosing_item = int(input("\n\nEnter the number code product that you want to buy: "))
-        ### chosen_item_price = menu[choosing_item]["Price"]
+        
 
         if choosing_item < len(menu):
             products.append(menu[choosing_item])
@@ -61,14 +61,11 @@ def machine(menu, run, products):
             print("The number code is incorrect.")
          
         adding_items = str(input("Would you like to add more? If yes,please press any Enter and you will be ask again. If no, please press 0. "))
-        ### chosen_item_price = menu[choosing_item][adding_items]["Price"]
 
-        ###if adding_items == len("Price"):
-            ###product.append(menu[adding_items])
-        if adding_items == "0": ## Changes
+      
+        if adding_items == "0": 
             run = False
-            print("Total Amount Purchased is ", sum(products) , "AED.") ## NEW CODE
-            ###print("Total Amount Purchased is ", products , "AED.") ### DOES NOT WORK THE WAY IT WAS SUPPOSED TO
+            print("Total Amount Purchased is ", sum(products) , "AED.") 
     
 
     amount = int(input("Press 1 if you want to pay by cash. Press 2 if you want to pay by card. "))
@@ -86,7 +83,7 @@ def machine(menu, run, products):
     else:
         print(amount)
 
-    pay_bool = int(input("1. Would you like to print the reciept? 2. Print the total amount in AED .. "))
+    pay_bool = int(input("1. Would you like to print the reciept? 2. Print the total amount .. "))
     if pay_bool == 1:
         print(create_reciept(products, reciept))
     elif pay_bool == 2:
